@@ -13,4 +13,7 @@ pdfReader = PyPDF2.PdfReader(pdfFile)
 
 # A quick test to make sure that it al works correctly
 print("The resume has: " + str(len(pdfReader.pages)) + " pages")
+pageObject = pdfReader.pages[0]
+pageText = pageObject.extract_text()
+print("The page text is " + pageText)
 
