@@ -17,8 +17,9 @@ def getThePageContents(url):
 
 
         rawContents = BeautifulSoup(response.text, 'html.parser')
+        emailAddressRegex = re.compile(r'((?<=>)[A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,}<)+')
+        emailAddress = emailAddressRegex.search(str(rawContents)).group()
+        print("The email address is: " + emailAddress[0:-1])
 
-        print(rawContents)
 
-
-getThePageContents("https://misinforeview.hks.harvard.edu/article/twitter-flagged-donald-trumps-tweets-with-election-misinformation-they-continued-to-spread-both-on-and-off-the-platform/")
+getThePageContents("https://justin-hollmer1.github.io/")
