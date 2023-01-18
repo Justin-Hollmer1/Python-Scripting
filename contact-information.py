@@ -3,12 +3,22 @@
 # like the email address, phone number, etc.
 
 import re
+import requests
+from bs4 import BeautifulSoup
 
 # TODO -- Get an entire webpage and store it in a variable.
 
-# webpage = urllib2.urlopen("")
-phoneNumberString = "The phone number is 111-111-1111 and it's pretty basic."
+def getThePageContents(url):
 
-phoneNumberRegex = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')
-theObject = phoneNumberRegex.search(phoneNumberString)
-print(theObject.group(2))
+    response = requests.get(url)
+
+    if response.status_code==200:
+        print("The web page has been opened: The contents of the page are: ")
+
+
+        rawContents = BeautifulSoup(response.text, 'html.parser')
+
+        print(rawContents)
+
+
+getThePageContents("https://misinforeview.hks.harvard.edu/article/twitter-flagged-donald-trumps-tweets-with-election-misinformation-they-continued-to-spread-both-on-and-off-the-platform/")
