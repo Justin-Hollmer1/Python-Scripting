@@ -19,15 +19,14 @@ pageObject = pdfReader.pages[0]
 pageText = pageObject.extract_text()
 # print("The page text is " + pageText)
 
-# Defining a couple of other parameters
-phoneNumberRegex = re.compile(r'\(\d\d\d\) \d\d\d-\d\d\d\d')
-otherPhoneNumberRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')
-phoneNumber = phoneNumberRegex.search(pageText)
+# These are both of the patterns that the phone numbers can appear in.
+phoneNumberRegex = re.compile(r'(\(\d\d\d\) |\d\d\d-)\d\d\d-\d\d\d\d')
+phoneNumber = phoneNumberRegex.search(pageText).group()
 
 
+emailAddressRegex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
+emailAddress = emailAddressRegex.search(pageText).group()
+print("The email address is: " + emailAddress)
 
 
-
-
-
-print(phoneNumber.group())
+print("The phone number is: " + phoneNumber)
